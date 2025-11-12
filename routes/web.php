@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,5 +32,9 @@ Route::get('/admin', function(){
 Route::get('/admin/jobs', function(){
     return "halaman ini hanya bisa diakses oleh admin";
 })->middleware('isAdmin');
+
+Route::get('/send-mail', [SendMailController::class, 'index'])->name('kirim-email');
+
+Route::post( '/post-email' , [ SendMailController::class , 'store']) -> name ( 'post-email');
 
 require __DIR__.'/auth.php';
